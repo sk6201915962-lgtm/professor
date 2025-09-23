@@ -243,7 +243,7 @@ export default function UnderConstructionPage() {
                 style={{ width: "75%" }}
               />
             </div>
-            <p className="text-xs text-muted-foreground mt-2">{"Expected launch: Q2 2025"}</p>
+            <p className="text-xs text-muted-foreground mt-2">{"Expected launch: AS SOON AS POSSIBLE"}</p>
           </div>
         </div>
 
