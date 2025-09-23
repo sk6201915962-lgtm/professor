@@ -26,6 +26,11 @@ import {
   Send,
   Menu,
   X,
+  Microscope,
+  Eye,
+  Zap,
+  Target,
+  Layers,
 } from "lucide-react"
 import SimpleChatbot from "@/components/simple-chatbot"
 
@@ -97,13 +102,43 @@ export default function HomePage() {
     { icon: Brain, label: "PATENTS", value: "18+" },
   ]
 
-  const skills = [
-    "FRACTAL GRAPHICS",
-    "APPLIED AI",
-    "ML/DL",
-    "BIOMEDICAL IMAGING",
-    "PATTERN RECOGNITION",
-    "MACHINE VISION",
+  const researchAreas = [
+    {
+      icon: Layers,
+      title: "FRACTAL GRAPHICS",
+      description:
+        "Fractal analysis of complex objects in nature, encompassing grayscale and color domains with box-counting techniques.",
+    },
+    {
+      icon: Brain,
+      title: "APPLIED AI",
+      description:
+        "Machine Learning and Deep Learning methodologies applied to biomedical image analysis and pattern recognition.",
+    },
+    {
+      icon: Zap,
+      title: "ML/DL",
+      description:
+        "Advanced machine learning algorithms and deep neural networks for medical imaging and computer vision applications.",
+    },
+    {
+      icon: Microscope,
+      title: "BIOMEDICAL IMAGING",
+      description:
+        "Application of fractal geometry in biomedical image processing with fundamental color image processing techniques.",
+    },
+    {
+      icon: Target,
+      title: "PATTERN RECOGNITION",
+      description:
+        "Character recognition and pattern analysis using fractal dimension as a metric for analyzing self-similar textures.",
+    },
+    {
+      icon: Eye,
+      title: "MACHINE VISION",
+      description:
+        "Computer Vision systems with emphasis on biomedical image analysis and automated diagnostic applications.",
+    },
   ]
 
   if (showIntro) {
@@ -322,11 +357,42 @@ export default function HomePage() {
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-8 sm:mb-10 lg:mb-12">
             RESEARCH EXPERTISE
           </h2>
+
+          <div className="max-w-4xl mx-auto mb-12 sm:mb-16">
+            <Card className="bg-[#2A2A28] border-[#EBB884]">
+              <CardContent className="p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#EBB884] mb-6 text-center">Research Interests</h3>
+                <div className="prose prose-sm sm:prose-base text-gray-300 leading-relaxed">
+                  <p className="mb-4 text-sm sm:text-base">
+                    The primary focus of my study lies in the fractal analysis of complex objects seen in nature,
+                    encompassing both grayscale and color domains. Additionally, I am intrigued by the fields of pattern
+                    recognition, character recognition, and the fundamentals of color image processing.
+                  </p>
+                  <p className="mb-4 text-sm sm:text-base">
+                    Regarding the recent study on fractal analysis, I have conducted many variations of box-counting,
+                    differential box-counting, and triangle box-counting techniques on diverse sets of natural images.
+                    My research primarily centers on the application of fractal geometry in biomedical image processing,
+                    specifically in conjunction with fundamental color image processing techniques.
+                  </p>
+                  <p className="text-sm sm:text-base">
+                    The objective is to assess the potential utility of fractal dimension (FD) as a metric for analyzing
+                    color images with self-similarity, particularly in the context of textures. The present area of
+                    research concentration encompasses Computer Vision, Pattern Recognition, with a primary emphasis on
+                    Biomedical Image Analysis utilizing the principles of Machine Learning and Deep Learning
+                    methodologies.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {skills.map((skill, index) => (
+            {researchAreas.map((area, index) => (
               <Card key={index} className="bg-[#2A2A28] border-[#EBB884] hover-lift">
                 <CardContent className="p-4 sm:p-6 text-center">
-                  <div className="text-[#EBB884] font-bold text-sm sm:text-base lg:text-lg">{skill}</div>
+                  <area.icon className="h-8 w-8 sm:h-10 sm:w-10 mx-auto mb-4 text-[#EBB884]" />
+                  <div className="text-[#EBB884] font-bold text-sm sm:text-base lg:text-lg mb-3">{area.title}</div>
+                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">{area.description}</p>
                 </CardContent>
               </Card>
             ))}
