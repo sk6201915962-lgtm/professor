@@ -1,262 +1,364 @@
 "use client"
 
-import type React from "react"
-
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import Image from "next/image"
+import Link from "next/link"
+import {
+  BookOpen,
+  FileText,
+  Award,
+  Users,
+  Brain,
+  Cpu,
+  ExternalLink,
+  Mail,
+  Phone,
+  MapPin,
+  ChevronDown,
+} from "lucide-react"
+import SimpleChatbot from "@/components/simple-chatbot"
 
-export default function UnderConstructionPage() {
-  const [mounted, setMounted] = useState(false)
-  const [email, setEmail] = useState("")
-  const [isSubscribed, setIsSubscribed] = useState(false)
+export default function HomePage() {
+  const [showIntro, setShowIntro] = useState(true)
+  const [currentSection, setCurrentSection] = useState("home")
 
   useEffect(() => {
-    setMounted(true)
+    const timer = setTimeout(() => {
+      setShowIntro(false)
+    }, 3000)
+
+    return () => clearTimeout(timer)
   }, [])
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (email) {
-      setIsSubscribed(true)
-      setEmail("")
-      setTimeout(() => setIsSubscribed(false), 3000)
-    }
+  const navigationItems = [
+    "HOME",
+    "ABOUT ME",
+    "EDUCATION",
+    "EXPERIENCE",
+    "WORK",
+    "STUDENTS",
+    "AWARDS & ACHIEVEMENTS",
+    "SKILLS",
+    "CONTACT",
+  ]
+
+  const workDropdownItems = ["RESEARCH INTERESTS", "PUBLICATION", "PROFESSIONAL ACTIVITIES"]
+
+  const socialLinks = [
+    { name: "Google Scholar", href: "#" },
+    { name: "Scopus", href: "#" },
+    { name: "ORCID", href: "#" },
+    { name: "Web of Science", href: "#" },
+    { name: "Research Gate", href: "#" },
+    { name: "DBLP", href: "#" },
+    { name: "Vidwan", href: "#" },
+  ]
+
+  const stats = [
+    { icon: BookOpen, label: "BOOKS", value: "8+" },
+    { icon: FileText, label: "PUBLICATIONS", value: "200+" },
+    { icon: Award, label: "SCI/SCIE", value: "60+" },
+    { icon: Users, label: "SCOPUS INDEX", value: "160+" },
+    { icon: Brain, label: "PATENTS", value: "18+" },
+  ]
+
+  const skills = [
+    "FRACTAL GRAPHICS",
+    "APPLIED AI",
+    "ML/DL",
+    "BIOMEDICAL IMAGING",
+    "PATTERN RECOGNITION",
+    "MACHINE VISION",
+  ]
+
+  if (showIntro) {
+    return (
+      <div className="min-h-screen bg-[#FAF8F3] flex items-center justify-center">
+        <div className="text-center logo-intro">
+          <Image
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Beige%20and%20Brown%20Simple%20Initial%20Wedding%20Logo-pFGzSk2LqebJKJNDU7Vgs2Bth4nHoG.png"
+            alt="Dr. Soumya Ranjan Nayak Logo"
+            width={300}
+            height={200}
+            className="mx-auto mb-4"
+          />
+        </div>
+      </div>
+    )
   }
 
-  if (!mounted) return null
-
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-hidden">
-      {/* Animated background elements */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div
-          className="absolute top-20 left-10 w-2 h-2 bg-primary/30 rounded-full float-animation"
-          style={{ animationDelay: "0s" }}
-        />
-        <div
-          className="absolute top-40 right-20 w-1 h-1 bg-accent/40 rounded-full float-animation"
-          style={{ animationDelay: "2s" }}
-        />
-        <div
-          className="absolute bottom-32 left-1/4 w-1.5 h-1.5 bg-primary/20 rounded-full float-animation"
-          style={{ animationDelay: "4s" }}
-        />
-        <div
-          className="absolute top-1/3 right-1/3 w-1 h-1 bg-accent/30 rounded-full float-animation"
-          style={{ animationDelay: "1s" }}
-        />
-      </div>
-
-      <div className="container mx-auto px-6 py-12 max-w-4xl">
-        {/* Header */}
-        <header className="text-center mb-16 fade-in-up" style={{ animationDelay: "0.2s" }}>
-          <div className="mb-6">
-            <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-medium">
-              {"🚧 Under Construction"}
-            </Badge>
+    <div className="min-h-screen">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-[#1F1F1D] z-50 py-4">
+        <div className="container mx-auto px-6">
+          <div className="flex justify-center space-x-8">
+            {navigationItems.map((item) =>
+              item === "WORK" ? (
+                <div key={item} className="relative group">
+                  <button
+                    className="text-white hover:text-[#EBB884] transition-colors duration-300 text-sm font-medium flex items-center gap-1"
+                    onClick={() => setCurrentSection(item.toLowerCase().replace(/\s+/g, "-"))}
+                  >
+                    {item}
+                    <ChevronDown className="h-3 w-3" />
+                  </button>
+                  {/* Dropdown Menu */}
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-56 bg-[#1F1F1D] border border-[#EBB884] rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    <div className="py-2">
+                      {workDropdownItems.map((dropdownItem) => (
+                        <button
+                          key={dropdownItem}
+                          className="block w-full text-left px-4 py-3 text-white hover:text-[#EBB884] hover:bg-[#2A2A28] transition-colors duration-200 text-sm"
+                          onClick={() => setCurrentSection(dropdownItem.toLowerCase().replace(/\s+/g, "-"))}
+                        >
+                          {dropdownItem}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <button
+                  key={item}
+                  className="text-white hover:text-[#EBB884] transition-colors duration-300 text-sm font-medium"
+                  onClick={() => setCurrentSection(item.toLowerCase().replace(/\s+/g, "-"))}
+                >
+                  {item}
+                </button>
+              ),
+            )}
           </div>
+        </div>
+      </nav>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance">
-            <span className="block text-foreground">Professor</span>
-            <span className="block text-primary shimmer bg-clip-text text-transparent bg-gradient-to-r from-primary via-accent to-primary">
-              Dr. Soumya Ranjan Nayak
-            </span>
-          </h1>
+      {/* Hero Section */}
+      <section className="min-h-screen bg-[#1F1F1D] grid-bg pt-20 flex items-center">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Professor Photo */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="photo-glow w-80 h-80 rounded-full overflow-hidden">
+                  <Image
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Soumya-Ranjan-Nayak-removebg-preview-lgjioeHxR3ikceX1mnHlnK66d0IxG6.png"
+                    alt="Dr. Soumya Ranjan Nayak"
+                    width={320}
+                    height={320}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+            </div>
 
-          <div className="flex justify-center mb-8 fade-in-up" style={{ animationDelay: "0.3s" }}>
-            <div className="relative">
-              <svg
-                width="120"
-                height="80"
-                viewBox="0 0 120 80"
-                className="bulldozer-animation"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {/* Bulldozer body */}
-                <rect x="20" y="35" width="60" height="25" rx="3" fill="hsl(var(--primary))" className="opacity-90" />
+            {/* Professor Info */}
+            <div className="text-white space-y-6 fade-in">
+              <div>
+                <h1 className="text-4xl lg:text-5xl font-bold mb-2 text-balance">DR. SOUMYA RANJAN NAYAK</h1>
+                <h2 className="text-xl lg:text-2xl text-[#EBB884] mb-4">ASSOCIATE PROFESSOR</h2>
+                <p className="text-lg text-gray-300 leading-relaxed">
+                  SCHOOL OF COMPUTER ENGINEERING
+                  <br />
+                  KIIT DEEMED TO BE UNIVERSITY
+                  <br />
+                  BHUBANESWAR, ODISHA, INDIA
+                </p>
+              </div>
 
-                {/* Cabin */}
-                <rect x="50" y="20" width="25" height="15" rx="2" fill="hsl(var(--primary))" className="opacity-80" />
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button className="bg-[#EBB884] text-[#1F1F1D] hover:bg-[#E8BF96] px-8 py-3 hover-lift" size="lg">
+                  VIEW MY WORKS
+                </Button>
+                <Button
+                  variant="outline"
+                  className="border-[#EBB884] text-[#EBB884] hover:bg-[#EBB884] hover:text-[#1F1F1D] px-8 py-3 hover-lift bg-transparent"
+                  size="lg"
+                  asChild
+                >
+                  <Link href="https://cse.kiit.ac.in/profiles/soumya-ranjan-nayak/" target="_blank">
+                    VIEW ON KIIT WEBSITE
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
 
-                {/* Blade */}
-                <rect
-                  x="5"
-                  y="25"
-                  width="20"
-                  height="30"
-                  rx="2"
-                  fill="hsl(var(--accent))"
-                  className="blade-animation"
-                />
-
-                {/* Tracks */}
-                <ellipse
-                  cx="30"
-                  cy="65"
-                  rx="12"
-                  ry="8"
-                  fill="hsl(var(--muted-foreground))"
-                  className="track-rotation"
-                />
-                <ellipse
-                  cx="60"
-                  cy="65"
-                  rx="12"
-                  ry="8"
-                  fill="hsl(var(--muted-foreground))"
-                  className="track-rotation"
-                  style={{ animationDelay: "0.5s" }}
-                />
-
-                {/* Track details */}
-                <circle cx="30" cy="65" r="3" fill="hsl(var(--background))" className="track-detail" />
-                <circle cx="60" cy="65" r="3" fill="hsl(var(--background))" className="track-detail" />
-
-                {/* Exhaust smoke */}
-                <circle cx="75" cy="15" r="2" fill="hsl(var(--muted-foreground))" className="smoke-puff opacity-60" />
-                <circle
-                  cx="78"
-                  cy="12"
-                  r="1.5"
-                  fill="hsl(var(--muted-foreground))"
-                  className="smoke-puff opacity-40"
-                  style={{ animationDelay: "0.5s" }}
-                />
-                <circle
-                  cx="81"
-                  cy="10"
-                  r="1"
-                  fill="hsl(var(--muted-foreground))"
-                  className="smoke-puff opacity-20"
-                  style={{ animationDelay: "1s" }}
-                />
-              </svg>
-
-              {/* Dust clouds */}
-              <div className="absolute -bottom-2 left-0 w-full flex justify-center space-x-2">
-                <div className="w-3 h-1 bg-muted-foreground/20 rounded-full dust-cloud" />
-                <div
-                  className="w-4 h-1 bg-muted-foreground/15 rounded-full dust-cloud"
-                  style={{ animationDelay: "0.3s" }}
-                />
-                <div
-                  className="w-2 h-1 bg-muted-foreground/10 rounded-full dust-cloud"
-                  style={{ animationDelay: "0.6s" }}
-                />
+              {/* Social Links */}
+              <div className="flex flex-wrap gap-3">
+                {socialLinks.map((link) => (
+                  <Badge
+                    key={link.name}
+                    variant="secondary"
+                    className="bg-[#E8BF96] text-[#1F1F1D] hover:bg-[#EBB884] cursor-pointer px-4 py-2 float"
+                  >
+                    {link.name}
+                  </Badge>
+                ))}
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto">
-            {"Professional Portfolio & Academic Excellence"}
-          </p>
-        </header>
+      {/* Statistics Section */}
+      <section className="py-20 bg-[#FCF0F0]">
+        <div className="container mx-auto px-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {stats.map((stat, index) => (
+              <Card key={index} className="text-center hover-lift pulse-stat">
+                <CardContent className="p-6">
+                  <stat.icon className="h-12 w-12 mx-auto mb-4 text-[#EBB884]" />
+                  <div className="text-3xl font-bold text-[#1F1F1D] mb-2">{stat.value}</div>
+                  <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
 
-        {/* Main content */}
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          {/* Left side - Content */}
-          <div className="space-y-8 fade-in-up" style={{ animationDelay: "0.4s" }}>
-            <div>
-              <h2 className="text-3xl font-semibold mb-4 text-foreground">{"Something Amazing is Coming"}</h2>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {
-                  "We are crafting a comprehensive digital portfolio that showcases academic achievements, research contributions, and professional excellence. This space will soon feature detailed insights into groundbreaking work and scholarly pursuits."
-                }
+      {/* Skills Section */}
+      <section className="py-20 bg-[#1F1F1D]">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-white text-center mb-12">RESEARCH EXPERTISE</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {skills.map((skill, index) => (
+              <Card key={index} className="bg-[#2A2A28] border-[#EBB884] hover-lift">
+                <CardContent className="p-6 text-center">
+                  <div className="text-[#EBB884] font-bold text-lg">{skill}</div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-20 bg-[#FCF0F0]">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-4xl font-bold text-[#1F1F1D] text-center mb-12">PROFILE SUMMARY</h2>
+            <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
+              <p className="text-xl mb-6">
+                Associate Professor in Computer Science and Engineering with 13+ years of teaching and research
+                experience in Biomedical Image Processing, Fractals, Machine Learning, and Deep Learning.
+              </p>
+              <p className="mb-6">
+                Authored 160+ peer-reviewed publications with over 2,600+ citations and an h-index of 26 (Scopus).
+                Recipient of prestigious MHRD Government of India fellowships (TEQIP-II). Inventor of 15+ patents
+                (8-Granted), both national and international.
+              </p>
+              <p>
+                Recognized among the World's Top 2% Scientists (Elsevier–Stanford University global ranking). Recipient
+                of the Best Teacher Award at the Odisha Technological Conclave 2024. Experienced in PhD and postgraduate
+                supervision with a strong track record of international research collaborations.
               </p>
             </div>
-
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-primary rounded-full pulse-glow" />
-                <span className="text-muted-foreground">{"Research Publications & Papers"}</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-accent rounded-full pulse-glow" style={{ animationDelay: "1s" }} />
-                <span className="text-muted-foreground">{"Academic Achievements & Awards"}</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-primary rounded-full pulse-glow" style={{ animationDelay: "2s" }} />
-                <span className="text-muted-foreground">{"Professional Experience & Expertise"}</span>
-              </div>
-            </div>
           </div>
+        </div>
+      </section>
 
-          {/* Right side - Interactive card */}
-          <div className="fade-in-up" style={{ animationDelay: "0.6s" }}>
-            <Card className="p-8 bg-card/50 backdrop-blur-sm border-border/50 float-animation">
-              <div className="text-center space-y-6">
-                <div className="w-20 h-20 mx-auto bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center pulse-glow">
-                  <span className="text-2xl font-bold text-primary-foreground">{"SRN"}</span>
-                </div>
-
-                <div>
-                  <h3 className="text-xl font-semibold mb-2">{"Stay Updated"}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {
-                      "Be the first to know when the portfolio goes live. Get notified about new publications and academic milestones."
-                    }
-                  </p>
-                </div>
-
-                <form onSubmit={handleSubscribe} className="space-y-4">
-                  <div className="relative">
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter your email address"
-                      className="w-full px-4 py-3 bg-input border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-ring text-foreground placeholder:text-muted-foreground"
-                      required
-                    />
+      {/* Education Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-[#1F1F1D] text-center mb-12">EDUCATION</h2>
+          <div className="max-w-4xl mx-auto space-y-8">
+            <Card className="hover-lift">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-[#EBB884] p-3 rounded-full">
+                    <Award className="h-6 w-6 text-[#1F1F1D]" />
                   </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-[#1F1F1D] mb-2">Ph.D. in Computer Science and Engineering</h3>
+                    <p className="text-gray-600 mb-2">
+                      BPUT (State Govt. Technical University) under MHRD Govt. of India fellowship-TEQIP-II
+                    </p>
+                    <p className="text-sm text-gray-500">2022 • Specialization in Fractal (Image Processing)</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-                  <Button
-                    type="submit"
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-3 transition-all duration-300 hover:scale-105"
-                    disabled={isSubscribed}
-                  >
-                    {isSubscribed ? "✓ Subscribed!" : "Notify Me"}
-                  </Button>
-                </form>
+            <Card className="hover-lift">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-[#E8BF96] p-3 rounded-full">
+                    <BookOpen className="h-6 w-6 text-[#1F1F1D]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-[#1F1F1D] mb-2">M.Tech in Information Technology</h3>
+                    <p className="text-gray-600 mb-2">OUTR (formerly CET, State Govt. Technical College under BPUT)</p>
+                    <p className="text-sm text-gray-500">2012 • Odisha, India</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-                {isSubscribed && (
-                  <p className="text-accent text-sm fade-in-up">{"Thank you! You'll be notified when we launch."}</p>
-                )}
-              </div>
+            <Card className="hover-lift">
+              <CardContent className="p-8">
+                <div className="flex items-start space-x-4">
+                  <div className="bg-[#FCF0F0] p-3 rounded-full border-2 border-[#EBB884]">
+                    <Cpu className="h-6 w-6 text-[#1F1F1D]" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-[#1F1F1D] mb-2">
+                      B.Tech in Computer Science and Engineering
+                    </h3>
+                    <p className="text-gray-600 mb-2">BPUT, Odisha, India</p>
+                    <p className="text-sm text-gray-500">2009</p>
+                  </div>
+                </div>
+              </CardContent>
             </Card>
           </div>
         </div>
+      </section>
 
-        {/* Progress indicator */}
-        <div className="text-center fade-in-up" style={{ animationDelay: "0.8s" }}>
-          <div className="max-w-md mx-auto">
-            <div className="flex justify-between text-sm text-muted-foreground mb-2">
-              <span>{"Progress"}</span>
-              <span>{"75%"}</span>
-            </div>
-            <div className="w-full bg-secondary rounded-full h-2 overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-primary to-accent rounded-full shimmer transition-all duration-1000 ease-out"
-                style={{ width: "75%" }}
-              />
-            </div>
-            <p className="text-xs text-muted-foreground mt-2">{"Expected launch: AS SOON AS POSSIBLE"}</p>
+      {/* Contact Section */}
+      <section className="py-20 bg-[#1F1F1D]">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold text-white text-center mb-12">CONTACT</h2>
+          <div className="max-w-2xl mx-auto">
+            <Card className="bg-[#2A2A28] border-[#EBB884]">
+              <CardContent className="p-8">
+                <div className="space-y-6">
+                  <div className="flex items-center space-x-4">
+                    <Mail className="h-6 w-6 text-[#EBB884]" />
+                    <div>
+                      <p className="text-white">soumyaranjan.nayakfcs@kiit.ac.in</p>
+                      <p className="text-gray-400">nayak.soumya17@gmail.com</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <Phone className="h-6 w-6 text-[#EBB884]" />
+                    <div>
+                      <p className="text-white">+91-8328911292</p>
+                      <p className="text-gray-400">+91-9437541849</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-4">
+                    <MapPin className="h-6 w-6 text-[#EBB884]" />
+                    <p className="text-white">KIIT University, Bhubaneswar, Odisha, India</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
+      </section>
 
-        {/* Footer */}
-        <footer
-          className="text-center mt-16 pt-8 border-t border-border/30 fade-in-up"
-          style={{ animationDelay: "1s" }}
-        >
-          <p className="text-muted-foreground text-sm">
-            {"© 2025 Professor Dr. Soumya Ranjan Nayak. Academic Portfolio in Development."}
-          </p>
-        </footer>
-      </div>
+      {/* Footer */}
+      <footer className="py-8 bg-[#FCF0F0]">
+        <div className="container mx-auto px-6 text-center">
+          <p className="text-gray-600">© 2025 Dr. Soumya Ranjan Nayak. All rights reserved.</p>
+        </div>
+      </footer>
+
+      {/* SimpleChatbot Component */}
+      <SimpleChatbot />
     </div>
   )
 }
