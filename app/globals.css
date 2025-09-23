@@ -95,12 +95,28 @@
   animation: grid-move 20s linear infinite;
 }
 
+@media (max-width: 768px) {
+  .grid-bg {
+    background-size: 30px 30px;
+    animation: grid-move-mobile 15s linear infinite;
+  }
+}
+
 @keyframes grid-move {
   0% {
     background-position: 0 0;
   }
   100% {
     background-position: 50px 50px;
+  }
+}
+
+@keyframes grid-move-mobile {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 30px 30px;
   }
 }
 
@@ -131,6 +147,12 @@
   z-index: -1;
 }
 
+@media (max-width: 640px) {
+  .photo-glow::before {
+    animation: rotate 6s linear infinite;
+  }
+}
+
 @keyframes rotate {
   100% {
     transform: rotate(360deg);
@@ -140,6 +162,12 @@
 /* Floating Animation */
 .float {
   animation: float 3s ease-in-out infinite;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .float {
+    animation: none;
+  }
 }
 
 @keyframes float {
@@ -157,6 +185,12 @@
   animation: fadeIn 0.8s ease-in-out;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .fade-in {
+    animation: none;
+  }
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -171,6 +205,12 @@
 /* Logo Intro Animation */
 .logo-intro {
   animation: logoScale 2s ease-in-out;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .logo-intro {
+    animation: none;
+  }
 }
 
 @keyframes logoScale {
@@ -193,6 +233,12 @@
   animation: pulseStat 2s ease-in-out infinite;
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .pulse-stat {
+    animation: none;
+  }
+}
+
 @keyframes pulseStat {
   0%,
   100% {
@@ -213,6 +259,13 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
+@media (hover: none) and (pointer: coarse) {
+  .hover-lift:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 /* Smooth Scrolling */
 html {
   scroll-behavior: smooth;
@@ -221,6 +274,12 @@ html {
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
+}
+
+@media (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
 }
 
 ::-webkit-scrollbar-track {
@@ -234,4 +293,58 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #e8bf96;
+}
+
+/* Mobile Navigation Improvements */
+@media (max-width: 1024px) {
+  .mobile-menu-overlay {
+    backdrop-filter: blur(4px);
+    background-color: rgba(31, 31, 29, 0.95);
+  }
+}
+
+/* Mobile Typography Scaling */
+@media (max-width: 640px) {
+  .hero-title {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+  }
+
+  .hero-subtitle {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.75rem; /* 28px */
+  }
+
+  .section-title {
+    font-size: 1.875rem; /* 30px */
+    line-height: 2.25rem; /* 36px */
+  }
+}
+
+/* Mobile Button Improvements */
+@media (max-width: 640px) {
+  .mobile-button {
+    min-height: 44px; /* iOS recommended touch target */
+    font-size: 0.875rem;
+  }
+}
+
+/* Mobile Card Spacing */
+@media (max-width: 640px) {
+  .mobile-card-spacing {
+    padding: 1rem;
+  }
+
+  .mobile-card-spacing h3 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Mobile Safe Area Adjustments */
+@supports (padding: max(0px)) {
+  .mobile-safe-area {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
 }

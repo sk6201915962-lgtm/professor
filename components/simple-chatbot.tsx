@@ -32,61 +32,62 @@ export default function SimpleChatbot() {
   return (
     <>
       {/* Chat Icon */}
-      <div className="fixed bottom-6 right-6 z-50">
+      <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50">
         <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-16 h-16 rounded-full bg-[#EBB884] hover:bg-[#E8BF96] text-[#1F1F1D] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+          className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#EBB884] hover:bg-[#E8BF96] text-[#1F1F1D] shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
           size="lg"
         >
-          {isOpen ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+          {isOpen ? <X className="h-4 w-4 sm:h-6 sm:w-6" /> : <MessageCircle className="h-4 w-4 sm:h-6 sm:w-6" />}
         </Button>
       </div>
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-50 w-80 max-h-96 overflow-hidden">
+        /* Made chat window responsive with mobile-first design */
+        <div className="fixed bottom-16 right-4 sm:bottom-24 sm:right-6 z-50 w-[calc(100vw-2rem)] max-w-80 sm:w-80 max-h-[70vh] sm:max-h-96 overflow-hidden">
           <Card className="shadow-2xl border-2 border-[#EBB884]">
-            <CardHeader className="bg-[#EBB884] text-[#1F1F1D] p-4">
-              <CardTitle className="text-lg font-bold">Dr. Nayak's Assistant</CardTitle>
-              <p className="text-sm opacity-90">How can I help you today?</p>
+            <CardHeader className="bg-[#EBB884] text-[#1F1F1D] p-3 sm:p-4">
+              <CardTitle className="text-base sm:text-lg font-bold">Dr. Nayak's Assistant</CardTitle>
+              <p className="text-xs sm:text-sm opacity-90">How can I help you today?</p>
             </CardHeader>
-            <CardContent className="p-4 bg-white">
+            <CardContent className="p-3 sm:p-4 bg-white max-h-[50vh] sm:max-h-none overflow-y-auto">
               {!activeSection ? (
-                <div className="space-y-3">
+                <div className="space-y-2 sm:space-y-3">
                   <Button
                     onClick={() => setActiveSection("contact")}
-                    className="w-full bg-[#1F1F1D] hover:bg-[#2A2A28] text-white justify-start"
+                    className="w-full bg-[#1F1F1D] hover:bg-[#2A2A28] text-white justify-start text-sm sm:text-base py-2 sm:py-3 min-h-[44px]"
                     variant="default"
                   >
-                    <Mail className="h-4 w-4 mr-2" />
+                    <Mail className="h-4 w-4 mr-2 flex-shrink-0" />
                     Contact Us
                   </Button>
                   <Button
                     onClick={() => setActiveSection("research")}
-                    className="w-full bg-[#1F1F1D] hover:bg-[#2A2A28] text-white justify-start"
+                    className="w-full bg-[#1F1F1D] hover:bg-[#2A2A28] text-white justify-start text-sm sm:text-base py-2 sm:py-3 min-h-[44px]"
                     variant="default"
                   >
-                    <BookOpen className="h-4 w-4 mr-2" />
+                    <BookOpen className="h-4 w-4 mr-2 flex-shrink-0" />
                     Research Details
                   </Button>
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   <Button
                     onClick={() => setActiveSection(null)}
-                    className="text-[#EBB884] hover:text-[#E8BF96] p-0 h-auto font-normal"
+                    className="text-[#EBB884] hover:text-[#E8BF96] p-0 h-auto font-normal text-sm sm:text-base min-h-[44px] flex items-center"
                     variant="ghost"
                   >
                     ← Back to menu
                   </Button>
 
                   {activeSection === "contact" && (
-                    <div className="space-y-3 text-sm">
+                    <div className="space-y-3 text-xs sm:text-sm">
                       <div className="flex items-start space-x-2">
                         <Mail className="h-4 w-4 text-[#EBB884] mt-0.5 flex-shrink-0" />
-                        <div>
+                        <div className="min-w-0 flex-1">
                           {contactInfo.emails.map((email, index) => (
-                            <p key={index} className="text-gray-700">
+                            <p key={index} className="text-gray-700 break-all">
                               {email}
                             </p>
                           ))}
@@ -94,7 +95,7 @@ export default function SimpleChatbot() {
                       </div>
                       <div className="flex items-start space-x-2">
                         <Phone className="h-4 w-4 text-[#EBB884] mt-0.5 flex-shrink-0" />
-                        <div>
+                        <div className="min-w-0 flex-1">
                           {contactInfo.phones.map((phone, index) => (
                             <p key={index} className="text-gray-700">
                               {phone}
@@ -104,27 +105,27 @@ export default function SimpleChatbot() {
                       </div>
                       <div className="flex items-start space-x-2">
                         <MapPin className="h-4 w-4 text-[#EBB884] mt-0.5 flex-shrink-0" />
-                        <p className="text-gray-700">{contactInfo.address}</p>
+                        <p className="text-gray-700 min-w-0 flex-1">{contactInfo.address}</p>
                       </div>
                     </div>
                   )}
 
                   {activeSection === "research" && (
-                    <div className="space-y-3 text-sm">
+                    <div className="space-y-3 text-xs sm:text-sm">
                       <div className="flex items-start space-x-2">
                         <BookOpen className="h-4 w-4 text-[#EBB884] mt-0.5 flex-shrink-0" />
-                        <p className="text-gray-700">{researchDetails.publications}</p>
+                        <p className="text-gray-700 min-w-0 flex-1">{researchDetails.publications}</p>
                       </div>
                       <div className="flex items-start space-x-2">
                         <Award className="h-4 w-4 text-[#EBB884] mt-0.5 flex-shrink-0" />
-                        <p className="text-gray-700">{researchDetails.citations}</p>
+                        <p className="text-gray-700 min-w-0 flex-1">{researchDetails.citations}</p>
                       </div>
                       <div className="flex items-start space-x-2">
                         <Users className="h-4 w-4 text-[#EBB884] mt-0.5 flex-shrink-0" />
-                        <p className="text-gray-700">{researchDetails.patents}</p>
+                        <p className="text-gray-700 min-w-0 flex-1">{researchDetails.patents}</p>
                       </div>
                       <div className="mt-3">
-                        <p className="font-medium text-[#1F1F1D] mb-2">Research Expertise:</p>
+                        <p className="font-medium text-[#1F1F1D] mb-2 text-sm">Research Expertise:</p>
                         <div className="space-y-1">
                           {researchDetails.expertise.map((area, index) => (
                             <p key={index} className="text-gray-600 text-xs">

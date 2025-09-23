@@ -5,8 +5,8 @@ import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Dr. Soumya Ranjan Nayak',
-  description: 'Portfolio website',
+  title: 'v0 App',
+  description: 'Created with v0',
   generator: 'v0.app',
 }
 

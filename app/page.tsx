@@ -1,9 +1,14 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -18,12 +23,21 @@ import {
   Phone,
   MapPin,
   ChevronDown,
+  Send,
+  Menu,
+  X,
 } from "lucide-react"
 import SimpleChatbot from "@/components/simple-chatbot"
 
 export default function HomePage() {
   const [showIntro, setShowIntro] = useState(true)
   const [currentSection, setCurrentSection] = useState("home")
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false) // Added mobile menu state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  })
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -32,6 +46,24 @@ export default function HomePage() {
 
     return () => clearTimeout(timer)
   }, [])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
+  }
+
+  const handleSendEmail = () => {
+    const { name, email, message } = formData
+    const subject = `Contact from ${name} - Portfolio Inquiry`
+    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=soumyaranjan.nayakfcs@kiit.ac.in&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+
+    window.open(gmailUrl, "_blank")
+  }
 
   const navigationItems = [
     "HOME",
@@ -83,7 +115,7 @@ export default function HomePage() {
             alt="Dr. Soumya Ranjan Nayak Logo"
             width={300}
             height={200}
-            className="mx-auto mb-4"
+            className="mx-auto mb-4 w-64 h-auto sm:w-80" // Made logo responsive
           />
         </div>
       </div>
@@ -94,8 +126,9 @@ export default function HomePage() {
     <div className="min-h-screen">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-[#1F1F1D] z-50 py-4">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-center space-x-8">
+        <div className="container mx-auto px-4 sm:px-6">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex justify-center space-x-8">
             {navigationItems.map((item) =>
               item === "WORK" ? (
                 <div key={item} className="relative group">
@@ -132,17 +165,76 @@ export default function HomePage() {
               ),
             )}
           </div>
+
+          {/* Mobile Navigation */}
+          <div className="lg:hidden flex justify-between items-center">
+            <div className="text-white font-bold text-lg">DR. S.R. NAYAK</div>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-white hover:text-[#EBB884] transition-colors"
+            >
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
+          </div>
+
+          {/* Mobile Menu Overlay */}
+          {mobileMenuOpen && (
+            <div className="lg:hidden absolute top-full left-0 w-full bg-[#1F1F1D] border-t border-[#EBB884] shadow-lg">
+              <div className="py-4 px-4 space-y-2">
+                {navigationItems.map((item) =>
+                  item === "WORK" ? (
+                    <div key={item} className="space-y-2">
+                      <button
+                        className="block w-full text-left text-white hover:text-[#EBB884] transition-colors duration-300 text-sm font-medium py-2"
+                        onClick={() => {
+                          setCurrentSection(item.toLowerCase().replace(/\s+/g, "-"))
+                          setMobileMenuOpen(false)
+                        }}
+                      >
+                        {item}
+                      </button>
+                      <div className="pl-4 space-y-1">
+                        {workDropdownItems.map((dropdownItem) => (
+                          <button
+                            key={dropdownItem}
+                            className="block w-full text-left text-gray-300 hover:text-[#EBB884] transition-colors duration-200 text-xs py-1"
+                            onClick={() => {
+                              setCurrentSection(dropdownItem.toLowerCase().replace(/\s+/g, "-"))
+                              setMobileMenuOpen(false)
+                            }}
+                          >
+                            {dropdownItem}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  ) : (
+                    <button
+                      key={item}
+                      className="block w-full text-left text-white hover:text-[#EBB884] transition-colors duration-300 text-sm font-medium py-2"
+                      onClick={() => {
+                        setCurrentSection(item.toLowerCase().replace(/\s+/g, "-"))
+                        setMobileMenuOpen(false)
+                      }}
+                    >
+                      {item}
+                    </button>
+                  ),
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
       <section className="min-h-screen bg-[#1F1F1D] grid-bg pt-20 flex items-center">
-        <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             {/* Professor Photo */}
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex justify-center lg:justify-end order-1 lg:order-1">
               <div className="relative">
-                <div className="photo-glow w-80 h-80 rounded-full overflow-hidden">
+                <div className="photo-glow w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden">
                   <Image
                     src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Soumya-Ranjan-Nayak-removebg-preview-lgjioeHxR3ikceX1mnHlnK66d0IxG6.png"
                     alt="Dr. Soumya Ranjan Nayak"
@@ -155,11 +247,13 @@ export default function HomePage() {
             </div>
 
             {/* Professor Info */}
-            <div className="text-white space-y-6 fade-in">
+            <div className="text-white space-y-6 fade-in text-center lg:text-left order-2 lg:order-2">
               <div>
-                <h1 className="text-4xl lg:text-5xl font-bold mb-2 text-balance">DR. SOUMYA RANJAN NAYAK</h1>
-                <h2 className="text-xl lg:text-2xl text-[#EBB884] mb-4">ASSOCIATE PROFESSOR</h2>
-                <p className="text-lg text-gray-300 leading-relaxed">
+                <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 text-balance">
+                  DR. SOUMYA RANJAN NAYAK
+                </h1>
+                <h2 className="text-lg sm:text-xl lg:text-2xl text-[#EBB884] mb-4">ASSOCIATE PROFESSOR</h2>
+                <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed">
                   SCHOOL OF COMPUTER ENGINEERING
                   <br />
                   KIIT DEEMED TO BE UNIVERSITY
@@ -168,13 +262,16 @@ export default function HomePage() {
                 </p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button className="bg-[#EBB884] text-[#1F1F1D] hover:bg-[#E8BF96] px-8 py-3 hover-lift" size="lg">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button
+                  className="bg-[#EBB884] text-[#1F1F1D] hover:bg-[#E8BF96] px-6 sm:px-8 py-3 hover-lift text-sm sm:text-base"
+                  size="lg"
+                >
                   VIEW MY WORKS
                 </Button>
                 <Button
                   variant="outline"
-                  className="border-[#EBB884] text-[#EBB884] hover:bg-[#EBB884] hover:text-[#1F1F1D] px-8 py-3 hover-lift bg-transparent"
+                  className="border-[#EBB884] text-[#EBB884] hover:bg-[#EBB884] hover:text-[#1F1F1D] px-6 sm:px-8 py-3 hover-lift bg-transparent text-sm sm:text-base"
                   size="lg"
                   asChild
                 >
@@ -186,12 +283,12 @@ export default function HomePage() {
               </div>
 
               {/* Social Links */}
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
                 {socialLinks.map((link) => (
                   <Badge
                     key={link.name}
                     variant="secondary"
-                    className="bg-[#E8BF96] text-[#1F1F1D] hover:bg-[#EBB884] cursor-pointer px-4 py-2 float"
+                    className="bg-[#E8BF96] text-[#1F1F1D] hover:bg-[#EBB884] cursor-pointer px-3 sm:px-4 py-2 float text-xs sm:text-sm"
                   >
                     {link.name}
                   </Badge>
@@ -203,15 +300,15 @@ export default function HomePage() {
       </section>
 
       {/* Statistics Section */}
-      <section className="py-20 bg-[#FCF0F0]">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#FCF0F0]">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
             {stats.map((stat, index) => (
               <Card key={index} className="text-center hover-lift pulse-stat">
-                <CardContent className="p-6">
-                  <stat.icon className="h-12 w-12 mx-auto mb-4 text-[#EBB884]" />
-                  <div className="text-3xl font-bold text-[#1F1F1D] mb-2">{stat.value}</div>
-                  <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                <CardContent className="p-4 sm:p-6">
+                  <stat.icon className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 mx-auto mb-3 sm:mb-4 text-[#EBB884]" />
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#1F1F1D] mb-2">{stat.value}</div>
+                  <div className="text-xs sm:text-sm text-gray-600 font-medium">{stat.label}</div>
                 </CardContent>
               </Card>
             ))}
@@ -220,14 +317,16 @@ export default function HomePage() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-20 bg-[#1F1F1D]">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-white text-center mb-12">RESEARCH EXPERTISE</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#1F1F1D]">
+        <div className="container mx-auto px-4 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-8 sm:mb-10 lg:mb-12">
+            RESEARCH EXPERTISE
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {skills.map((skill, index) => (
               <Card key={index} className="bg-[#2A2A28] border-[#EBB884] hover-lift">
-                <CardContent className="p-6 text-center">
-                  <div className="text-[#EBB884] font-bold text-lg">{skill}</div>
+                <CardContent className="p-4 sm:p-6 text-center">
+                  <div className="text-[#EBB884] font-bold text-sm sm:text-base lg:text-lg">{skill}</div>
                 </CardContent>
               </Card>
             ))}
@@ -236,21 +335,23 @@ export default function HomePage() {
       </section>
 
       {/* About Section */}
-      <section className="py-20 bg-[#FCF0F0]">
-        <div className="container mx-auto px-6">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#FCF0F0]">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl font-bold text-[#1F1F1D] text-center mb-12">PROFILE SUMMARY</h2>
-            <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-              <p className="text-xl mb-6">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1F1F1D] text-center mb-8 sm:mb-10 lg:mb-12">
+              PROFILE SUMMARY
+            </h2>
+            <div className="prose prose-sm sm:prose-base lg:prose-lg max-w-none text-gray-700 leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl mb-4 sm:mb-6">
                 Associate Professor in Computer Science and Engineering with 13+ years of teaching and research
                 experience in Biomedical Image Processing, Fractals, Machine Learning, and Deep Learning.
               </p>
-              <p className="mb-6">
+              <p className="mb-4 sm:mb-6 text-sm sm:text-base">
                 Authored 160+ peer-reviewed publications with over 2,600+ citations and an h-index of 26 (Scopus).
                 Recipient of prestigious MHRD Government of India fellowships (TEQIP-II). Inventor of 15+ patents
                 (8-Granted), both national and international.
               </p>
-              <p>
+              <p className="text-sm sm:text-base">
                 Recognized among the World's Top 2% Scientists (Elsevier–Stanford University global ranking). Recipient
                 of the Best Teacher Award at the Odisha Technological Conclave 2024. Experienced in PhD and postgraduate
                 supervision with a strong track record of international research collaborations.
@@ -261,54 +362,64 @@ export default function HomePage() {
       </section>
 
       {/* Education Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-[#1F1F1D] text-center mb-12">EDUCATION</h2>
-          <div className="max-w-4xl mx-auto space-y-8">
+      <section className="py-12 sm:py-16 lg:py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#1F1F1D] text-center mb-8 sm:mb-10 lg:mb-12">
+            EDUCATION
+          </h2>
+          <div className="max-w-4xl mx-auto space-y-6 sm:space-y-8">
             <Card className="hover-lift">
-              <CardContent className="p-8">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-[#EBB884] p-3 rounded-full">
-                    <Award className="h-6 w-6 text-[#1F1F1D]" />
+              <CardContent className="p-4 sm:p-6 lg:p-8">
+                <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                  <div className="bg-[#EBB884] p-3 rounded-full flex-shrink-0">
+                    <Award className="h-5 w-5 sm:h-6 sm:w-6 text-[#1F1F1D]" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-[#1F1F1D] mb-2">Ph.D. in Computer Science and Engineering</h3>
-                    <p className="text-gray-600 mb-2">
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#1F1F1D] mb-2">
+                      Ph.D. in Computer Science and Engineering
+                    </h3>
+                    <p className="text-sm sm:text-base text-gray-600 mb-2">
                       BPUT (State Govt. Technical University) under MHRD Govt. of India fellowship-TEQIP-II
                     </p>
-                    <p className="text-sm text-gray-500">2022 • Specialization in Fractal (Image Processing)</p>
+                    <p className="text-xs sm:text-sm text-gray-500">
+                      2022 • Specialization in Fractal (Image Processing)
+                    </p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="hover-lift">
-              <CardContent className="p-8">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-[#E8BF96] p-3 rounded-full">
-                    <BookOpen className="h-6 w-6 text-[#1F1F1D]" />
+              <CardContent className="p-4 sm:p-6 lg:p-8">
+                <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                  <div className="bg-[#E8BF96] p-3 rounded-full flex-shrink-0">
+                    <BookOpen className="h-5 w-5 sm:h-6 sm:w-6 text-[#1F1F1D]" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-[#1F1F1D] mb-2">M.Tech in Information Technology</h3>
-                    <p className="text-gray-600 mb-2">OUTR (formerly CET, State Govt. Technical College under BPUT)</p>
-                    <p className="text-sm text-gray-500">2012 • Odisha, India</p>
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#1F1F1D] mb-2">
+                      M.Tech in Information Technology
+                    </h3>
+                    <p className="text-sm sm:text-base text-gray-600 mb-2">
+                      OUTR (formerly CET, State Govt. Technical College under BPUT)
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-500">2012 • Odisha, India</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             <Card className="hover-lift">
-              <CardContent className="p-8">
-                <div className="flex items-start space-x-4">
-                  <div className="bg-[#FCF0F0] p-3 rounded-full border-2 border-[#EBB884]">
-                    <Cpu className="h-6 w-6 text-[#1F1F1D]" />
+              <CardContent className="p-4 sm:p-6 lg:p-8">
+                <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-4">
+                  <div className="bg-[#FCF0F0] p-3 rounded-full border-2 border-[#EBB884] flex-shrink-0">
+                    <Cpu className="h-5 w-5 sm:h-6 sm:w-6 text-[#1F1F1D]" />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-[#1F1F1D] mb-2">
+                  <div className="flex-1">
+                    <h3 className="text-lg sm:text-xl font-bold text-[#1F1F1D] mb-2">
                       B.Tech in Computer Science and Engineering
                     </h3>
-                    <p className="text-gray-600 mb-2">BPUT, Odisha, India</p>
-                    <p className="text-sm text-gray-500">2009</p>
+                    <p className="text-sm sm:text-base text-gray-600 mb-2">BPUT, Odisha, India</p>
+                    <p className="text-xs sm:text-sm text-gray-500">2009</p>
                   </div>
                 </div>
               </CardContent>
@@ -318,31 +429,95 @@ export default function HomePage() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 bg-[#1F1F1D]">
-        <div className="container mx-auto px-6">
-          <h2 className="text-4xl font-bold text-white text-center mb-12">CONTACT</h2>
-          <div className="max-w-2xl mx-auto">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#1F1F1D]">
+        <div className="container mx-auto px-4 sm:px-6">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white text-center mb-8 sm:mb-10 lg:mb-12">
+            CONTACT
+          </h2>
+          <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12">
+            {/* Contact Information */}
             <Card className="bg-[#2A2A28] border-[#EBB884]">
-              <CardContent className="p-8">
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <Mail className="h-6 w-6 text-[#EBB884]" />
+              <CardContent className="p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#EBB884] mb-6">Get In Touch</h3>
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <Mail className="h-5 w-5 sm:h-6 sm:w-6 text-[#EBB884] flex-shrink-0" />
                     <div>
-                      <p className="text-white">soumyaranjan.nayakfcs@kiit.ac.in</p>
-                      <p className="text-gray-400">nayak.soumya17@gmail.com</p>
+                      <p className="text-white text-sm sm:text-base">soumyaranjan.nayakfcs@kiit.ac.in</p>
+                      <p className="text-gray-400 text-sm">nayak.soumya17@gmail.com</p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <Phone className="h-6 w-6 text-[#EBB884]" />
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <Phone className="h-5 w-5 sm:h-6 sm:w-6 text-[#EBB884] flex-shrink-0" />
                     <div>
-                      <p className="text-white">+91-8328911292</p>
-                      <p className="text-gray-400">+91-9437541849</p>
+                      <p className="text-white text-sm sm:text-base">+91-8328911292</p>
+                      <p className="text-gray-400 text-sm">+91-9437541849</p>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <MapPin className="h-6 w-6 text-[#EBB884]" />
-                    <p className="text-white">KIIT University, Bhubaneswar, Odisha, India</p>
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    <MapPin className="h-5 w-5 sm:h-6 sm:w-6 text-[#EBB884] flex-shrink-0" />
+                    <p className="text-white text-sm sm:text-base">KIIT University, Bhubaneswar, Odisha, India</p>
                   </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-[#2A2A28] border-[#EBB884]">
+              <CardContent className="p-6 sm:p-8">
+                <h3 className="text-xl sm:text-2xl font-bold text-[#EBB884] mb-6">Send Message</h3>
+                <div className="space-y-4 sm:space-y-6">
+                  <div>
+                    <Label htmlFor="name" className="text-white mb-2 block text-sm sm:text-base">
+                      Name
+                    </Label>
+                    <Input
+                      id="name"
+                      name="name"
+                      type="text"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="bg-[#1F1F1D] border-[#EBB884] text-white placeholder:text-gray-400 focus:border-[#E8BF96] text-sm sm:text-base"
+                      placeholder="Your full name"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="email" className="text-white mb-2 block text-sm sm:text-base">
+                      Email
+                    </Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="bg-[#1F1F1D] border-[#EBB884] text-white placeholder:text-gray-400 focus:border-[#E8BF96] text-sm sm:text-base"
+                      placeholder="your.email@example.com"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="message" className="text-white mb-2 block text-sm sm:text-base">
+                      Message
+                    </Label>
+                    <Textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="bg-[#1F1F1D] border-[#EBB884] text-white placeholder:text-gray-400 focus:border-[#E8BF96] min-h-[120px] text-sm sm:text-base"
+                      placeholder="Your message here..."
+                      required
+                    />
+                  </div>
+                  <Button
+                    onClick={handleSendEmail}
+                    className="w-full bg-[#EBB884] text-[#1F1F1D] hover:bg-[#E8BF96] font-semibold py-3 hover-lift text-sm sm:text-base"
+                    disabled={!formData.name || !formData.email || !formData.message}
+                  >
+                    <Send className="mr-2 h-4 w-4" />
+                    Send Message via Gmail
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -351,9 +526,9 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 bg-[#FCF0F0]">
-        <div className="container mx-auto px-6 text-center">
-          <p className="text-gray-600">© 2025 Dr. Soumya Ranjan Nayak. All rights reserved.</p>
+      <footer className="py-6 sm:py-8 bg-[#FCF0F0]">
+        <div className="container mx-auto px-4 sm:px-6 text-center">
+          <p className="text-gray-600 text-sm sm:text-base">© 2025 Dr. Soumya Ranjan Nayak. All rights reserved.</p>
         </div>
       </footer>
 
