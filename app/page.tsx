@@ -85,13 +85,16 @@ export default function HomePage() {
   const workDropdownItems = ["RESEARCH INTERESTS", "PUBLICATION", "PROFESSIONAL ACTIVITIES"]
 
   const socialLinks = [
-    { name: "Google Scholar", href: "#" },
-    { name: "Scopus", href: "#" },
-    { name: "ORCID", href: "#" },
-    { name: "Web of Science", href: "#" },
-    { name: "Research Gate", href: "#" },
-    { name: "DBLP", href: "#" },
-    { name: "Vidwan", href: "#" },
+    {
+      name: "Google Scholar",
+      href: "https://scholar.google.co.in/citations?hl=en&user=8yr9XTAAAAAJ&view_op=list_works",
+    },
+    { name: "Scopus", href: "https://www.scopus.com/authid/detail.uri?authorId=57188876957" },
+    { name: "ORCID", href: "https://orcid.org/0000-0002-4155-884X" },
+    { name: "Web of Science", href: "https://www.webofscience.com/wos/author/record/S-5908-2018" },
+    { name: "Research Gate", href: "https://www.researchgate.net/profile/Soumya-Nayak-14" },
+    { name: "DBLP", href: "https://dblp.org/pid/250/8949.html" },
+    { name: "Vidwan", href: "https://vidwan.inflibnet.ac.in/profile/133065" },
   ]
 
   const stats = [
@@ -189,6 +192,14 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
+              ) : item === "ABOUT ME" ? (
+                <Link
+                  key={item}
+                  href="/about-me"
+                  className="text-white hover:text-[#EBB884] transition-colors duration-300 text-sm font-medium"
+                >
+                  {item}
+                </Link>
               ) : (
                 <button
                   key={item}
@@ -243,6 +254,15 @@ export default function HomePage() {
                         ))}
                       </div>
                     </div>
+                  ) : item === "ABOUT ME" ? (
+                    <Link
+                      key={item}
+                      href="/about-me"
+                      className="block w-full text-left text-white hover:text-[#EBB884] transition-colors duration-300 text-sm font-medium py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item}
+                    </Link>
                   ) : (
                     <button
                       key={item}
@@ -320,13 +340,20 @@ export default function HomePage() {
               {/* Social Links */}
               <div className="flex flex-wrap gap-2 sm:gap-3 justify-center lg:justify-start">
                 {socialLinks.map((link) => (
-                  <Badge
+                  <Link
                     key={link.name}
-                    variant="secondary"
-                    className="bg-[#E8BF96] text-[#1F1F1D] hover:bg-[#EBB884] cursor-pointer px-3 sm:px-4 py-2 float text-xs sm:text-sm"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block"
                   >
-                    {link.name}
-                  </Badge>
+                    <Badge
+                      variant="secondary"
+                      className="bg-[#E8BF96] text-[#1F1F1D] hover:bg-[#EBB884] cursor-pointer px-3 sm:px-4 py-2 float text-xs sm:text-sm transition-colors duration-300"
+                    >
+                      {link.name}
+                    </Badge>
+                  </Link>
                 ))}
               </div>
             </div>
