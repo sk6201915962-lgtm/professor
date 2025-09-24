@@ -181,13 +181,13 @@ export default function HomePage() {
                   <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-56 bg-[#1F1F1D] border border-[#EBB884] rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                     <div className="py-2">
                       {workDropdownItems.map((dropdownItem) => (
-                        <button
+                        <Link
                           key={dropdownItem}
+                          href={dropdownItem === "PUBLICATION" ? "/publications" : "#"}
                           className="block w-full text-left px-4 py-3 text-white hover:text-[#EBB884] hover:bg-[#2A2A28] transition-colors duration-200 text-sm"
-                          onClick={() => setCurrentSection(dropdownItem.toLowerCase().replace(/\s+/g, "-"))}
                         >
                           {dropdownItem}
-                        </button>
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -257,16 +257,14 @@ export default function HomePage() {
                       </button>
                       <div className="pl-4 space-y-1">
                         {workDropdownItems.map((dropdownItem) => (
-                          <button
+                          <Link
                             key={dropdownItem}
+                            href={dropdownItem === "PUBLICATION" ? "/publications" : "#"}
                             className="block w-full text-left text-gray-300 hover:text-[#EBB884] transition-colors duration-200 text-xs py-1"
-                            onClick={() => {
-                              setCurrentSection(dropdownItem.toLowerCase().replace(/\s+/g, "-"))
-                              setMobileMenuOpen(false)
-                            }}
+                            onClick={() => setMobileMenuOpen(false)}
                           >
                             {dropdownItem}
-                          </button>
+                          </Link>
                         ))}
                       </div>
                     </div>
