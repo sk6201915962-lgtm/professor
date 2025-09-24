@@ -208,6 +208,14 @@ export default function HomePage() {
                 >
                   {item}
                 </Link>
+              ) : item === "EDUCATION" ? (
+                <Link
+                  key={item}
+                  href="/education"
+                  className="text-white hover:text-[#EBB884] transition-colors duration-300 text-sm font-medium"
+                >
+                  {item}
+                </Link>
               ) : (
                 <button
                   key={item}
@@ -275,6 +283,15 @@ export default function HomePage() {
                     <Link
                       key={item}
                       href="/experience"
+                      className="block w-full text-left text-white hover:text-[#EBB884] transition-colors duration-300 text-sm font-medium py-2"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item}
+                    </Link>
+                  ) : item === "EDUCATION" ? (
+                    <Link
+                      key={item}
+                      href="/education"
                       className="block w-full text-left text-white hover:text-[#EBB884] transition-colors duration-300 text-sm font-medium py-2"
                       onClick={() => setMobileMenuOpen(false)}
                     >
