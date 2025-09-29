@@ -82,6 +82,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -106,6 +107,7 @@
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 50px 50px;
   }
@@ -115,6 +117,7 @@
   0% {
     background-position: 0 0;
   }
+
   100% {
     background-position: 30px 30px;
   }
@@ -171,10 +174,12 @@
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -196,6 +201,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -218,10 +224,12 @@
     transform: scale(0.8);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.1);
     opacity: 1;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
@@ -240,10 +248,12 @@
 }
 
 @keyframes pulseStat {
+
   0%,
   100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
@@ -306,25 +316,32 @@ html {
 /* Mobile Typography Scaling */
 @media (max-width: 640px) {
   .hero-title {
-    font-size: 1.875rem; /* 30px */
-    line-height: 2.25rem; /* 36px */
+    font-size: 1.875rem;
+    /* 30px */
+    line-height: 2.25rem;
+    /* 36px */
   }
 
   .hero-subtitle {
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.75rem; /* 28px */
+    font-size: 1.125rem;
+    /* 18px */
+    line-height: 1.75rem;
+    /* 28px */
   }
 
   .section-title {
-    font-size: 1.875rem; /* 30px */
-    line-height: 2.25rem; /* 36px */
+    font-size: 1.875rem;
+    /* 30px */
+    line-height: 2.25rem;
+    /* 36px */
   }
 }
 
 /* Mobile Button Improvements */
 @media (max-width: 640px) {
   .mobile-button {
-    min-height: 44px; /* iOS recommended touch target */
+    min-height: 44px;
+    /* iOS recommended touch target */
     font-size: 0.875rem;
   }
 }
@@ -347,4 +364,14 @@ html {
     padding-left: max(1rem, env(safe-area-inset-left));
     padding-right: max(1rem, env(safe-area-inset-right));
   }
+}
+
+.custom-list {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.custom-list li {
+  color: #EBB884;
+  margin-bottom: 6px;
 }

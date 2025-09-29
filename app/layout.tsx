@@ -1,26 +1,31 @@
-import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
-import { Analytics } from '@vercel/analytics/next'
-import './globals.css'
-
-export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.app',
-}
+import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Analytics } from "@vercel/analytics/next";
+import Navbar from "@/components/common/Navbar";
+import Footer from "@/components/common/Footer";
+import SimpleChatbot from "@/components/simple-chatbot";
+import ScrollToTop from "@/components/common/ScrollToTop";
+import "./globals.css";
+import { SEO_METADATA_HOME } from "@/lib/SEO_TAGS";
+import ClientWrapper from "./ClientWrapper";
+export const metadata: Metadata = SEO_METADATA_HOME;
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
-        {children}
-        <Analytics />
+        <ClientWrapper>
+          <Navbar />
+          {children}
+          <Analytics />
+          <SimpleChatbot />
+          <ScrollToTop />
+          <Footer />
+        </ClientWrapper>
       </body>
     </html>
-  )
+  );
 }
