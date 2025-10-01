@@ -15,7 +15,7 @@ export default function StudentsPage() {
                 subtext="Guided Research Projects by Dr. Soumya Ranjan Nayak"
             />
             <section className="max-w-7xl mx-auto my-12">
-                <h2 className="text-2xl font-bold text-black mb-6">Ongoing Students</h2>
+                <h2 className="text-2xl font-bold text-black mb-6">PHD Scholars</h2>
                 <div className="grid gap-6 grid-cols-1">
                     {ongoingStudents.map((student, idx) => (
                         <StudentCard
@@ -32,7 +32,7 @@ export default function StudentsPage() {
             </section>
 
             <section className="max-w-7xl mx-auto my-12">
-                <h2 className="text-2xl font-semibold text-black mb-6">Completed Students</h2>
+                <h2 className="text-2xl font-semibold text-black mb-6">MTech Scholars</h2>
                 <div className="grid gap-6 grid-cols-1">
                     {completedStudents.map((student, idx) => (
                         <StudentCard

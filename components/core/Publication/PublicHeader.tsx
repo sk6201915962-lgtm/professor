@@ -21,7 +21,7 @@ const PublicHeader = () => {
               <Card className="bg-[#2A2A28] border-[#EBB884]">
                 <CardContent className="p-4 text-center">
                   <Award className="h-8 w-8 mx-auto mb-2 text-[#EBB884]" />
-                  <div className="text-2xl font-bold text-white">76+</div>
+                  <div className="text-2xl font-bold text-white">60+ SCI/SCIE</div>
                   <div className="text-sm text-gray-300">Journal Papers</div>
                 </CardContent>
               </Card>
