@@ -12,7 +12,7 @@ export default function StudentsPage() {
             <CommonHeaderSection
                 icon={Users}
                 title="Students Supervision"
-                subtext="Guided Research Projects by Dr. Soumya Ranjan Nayak"
+                subtext="Guided Research Scholar by Dr. Soumya Ranjan Nayak"
             />
             <section className="max-w-7xl mx-auto my-12">
                 <h2 className="text-2xl font-bold text-black mb-6">PHD Scholars</h2>
