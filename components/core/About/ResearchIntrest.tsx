@@ -25,18 +25,18 @@ const ResearchIntrest = () => {
               <CardContent className="p-8">
                 <h3 className="text-2xl font-bold text-[#EBB884] mb-6 text-center">Current Research Focus</h3>
                 <div className="prose prose-sm sm:prose-base text-gray-300 leading-relaxed">
-                  <p className="mb-4">
+                  <p className="mb-4 text-justify">
                     The primary focus of my study lies in the fractal analysis of complex objects seen in nature,
                     encompassing both grayscale and color domains. Additionally, I am intrigued by the fields of pattern
                     recognition, character recognition, and the fundamentals of color image processing.
                   </p>
-                  <p className="mb-4">
+                  <p className="mb-4 text-justify">
                     Regarding the recent study on fractal analysis, I have conducted many variations of box-counting,
                     differential box-counting, and triangle box-counting techniques on diverse sets of natural images.
                     My research primarily centers on the application of fractal geometry in biomedical image processing,
                     specifically in conjunction with fundamental color image processing techniques.
                   </p>
-                  <p>
+                  <p className='text-justify'>
                     The objective is to assess the potential utility of fractal dimension (FD) as a metric for analyzing
                     color images with self-similarity, particularly in the context of textures. The present area of
                     research concentration encompasses Computer Vision, Pattern Recognition, with a primary emphasis on

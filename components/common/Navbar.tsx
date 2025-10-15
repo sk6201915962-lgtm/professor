@@ -6,7 +6,7 @@ import React, { useState } from 'react'
 
 const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-
+  const isExternal = (url: string) => /^https?:\/\//.test(url)
   return (
     <nav className="fixed top-0 w-full bg-[#1F1F1D] z-50 py-4">
       <div className="container mx-auto px-4 sm:px-6 flex md:justify-center justify-end items-center">
@@ -24,6 +24,8 @@ const Navbar: React.FC = () => {
                       <Link
                         key={d.name}
                         href={d.href}
+                        target={isExternal(d.href) ? "_blank" : undefined}
+                        rel={isExternal(d.href) ? "noopener noreferrer" : undefined}
                         className="block w-full text-left px-4 py-3 text-white hover:text-[#EBB884] hover:bg-[#2A2A28] transition-colors duration-200 text-sm"
                       >
                         {d.name}
@@ -53,9 +55,8 @@ const Navbar: React.FC = () => {
 
       {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-[#1F1F1D] z-50 transform ${
-          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out shadow-lg`}
+        className={`fixed top-0 left-0 h-full w-64 bg-[#1F1F1D] z-50 transform ${mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+          } transition-transform duration-300 ease-in-out shadow-lg`}
       >
         <div className="flex justify-between items-center p-4 border-b border-[#EBB884]">
           <div className="text-white font-bold text-lg">Menu</div>
@@ -73,6 +74,8 @@ const Navbar: React.FC = () => {
                     <Link
                       key={d.name}
                       href={d.href}
+                      target={isExternal(d.href) ? "_blank" : undefined}
+                      rel={isExternal(d.href) ? "noopener noreferrer" : undefined}
                       className="text-gray-300 hover:text-[#EBB884] text-sm py-1"
                       onClick={() => setMobileMenuOpen(false)}
                     >

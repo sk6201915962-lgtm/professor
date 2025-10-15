@@ -9,16 +9,12 @@ const AboutSection = () => {
               PROFILE SUMMARY
             </h2>
             <div className="prose prose-sm sm:prose-base lg:prose-lg max-w-none text-gray-700 leading-relaxed">
-              <p className="text-base sm:text-lg lg:text-xl mb-4 sm:mb-6">
+              <p className="text-base sm:text-lg lg:text-xl mb-4 sm:mb-6 text-justify">
                 Assistant Professor in Computer Science and Engineering with 13+ years of teaching and research
                 experience in Biomedical Image Processing, Fractals, Machine Learning, and Deep Learning.
-              </p>
-              <p className="mb-4 sm:mb-6 text-sm sm:text-base">
                 Authored 160+ peer-reviewed publications with over 2,600+ citations and an h-index of 26 (Scopus).
                 Recipient of prestigious MHRD Government of India fellowships (TEQIP-II). Inventor of 15+ patents
                 (8-Granted), both national and international.
-              </p>
-              <p className="text-sm sm:text-base">
                 Recognized among the World's Top 2% Scientists (Elsevier–Stanford University global ranking). Recipient
                 of the Best Teacher Award at the Odisha Technological Conclave 2024. Experienced in PhD and postgraduate
                 supervision with a strong track record of international research collaborations.

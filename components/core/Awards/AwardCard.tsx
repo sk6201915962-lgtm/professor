@@ -1,5 +1,5 @@
 import { AwardCardProps } from "@/lib/Types";
-import React from "react";
+import Link from "next/link";
 
 const AwardCard: React.FC<AwardCardProps> = ({ icon: Icon, title, description }) => {
   return (
@@ -10,11 +10,23 @@ const AwardCard: React.FC<AwardCardProps> = ({ icon: Icon, title, description })
       </div>
       <ul className="list-disc list-inside text-sm text-[#EBB884] space-y-1">
         {description.map((desc, idx) => (
-          <li key={idx}>{desc}</li>
+          <li key={idx}>
+            {desc.link ? (
+              <Link
+                href={desc.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline text-[#EBB884]"
+              >
+                {desc.text}
+              </Link>
+            ) : (
+              desc.text
+            )}
+          </li>
         ))}
       </ul>
     </div>
   );
 };
-
-export default AwardCard;
+export default AwardCard

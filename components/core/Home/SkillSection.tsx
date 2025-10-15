@@ -14,7 +14,7 @@ const SkillSection = () => {
           <Card className="bg-[#2A2A28] border-[#EBB884]">
             <CardContent className="p-6 sm:p-8">
               <h3 className="text-xl sm:text-2xl font-bold text-[#EBB884] mb-6 text-center">Research Interests</h3>
-              <ul className="custom-list">
+              <ul className="custom-list text-lg">
                 <li>Fractal Analysis of Natural Images (Grayscale &amp; Color)</li>
                 <li>Biomedical Image Processing using Fractal Geometry</li>
                 <li>Texture Analysis with Fractal Dimension (FD)</li>

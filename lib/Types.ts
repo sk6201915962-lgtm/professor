@@ -2,6 +2,7 @@ export interface BasePublication {
   id: number;
   title: string;
   authors?: string;
+  booklink?:string;
   inventors?: string;
   year: number;
   category: string;
@@ -68,15 +69,19 @@ export interface CardProps {
   status: string;
   university: string;
 }
+export interface AwardDescription {
+  text: string;
+  link?: string;
+}
 export interface AwardData {
   icon: React.ElementType;
   title: string;
-  description: string[];
+  description: AwardDescription[];
 }
 export interface AwardCardProps {
   icon:  React.ElementType;
   title: string;
-  description: string[];
+  description: AwardDescription[];
 }
 export interface ProfessionalCardItem {
   title: string;

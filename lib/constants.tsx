@@ -1,4 +1,4 @@
-import { Award, BookOpen, Brain, Building, Cpu, Eye, FileText, Globe, GraduationCap, Layers, Microscope, Star, Target, User, Users, Zap } from "lucide-react"
+import { Award, BookOpen, Brain, BrainCircuit, Building, Cpu, Eye, FileText, Globe, GraduationCap, Layers, Microscope, Star, Target, User, Users, Zap } from "lucide-react"
 import { AwardData, ProfessionalCardData, Skill, Student } from "./Types"
 
 export const socialLinks = [
@@ -118,6 +118,7 @@ export const researchInterests = [
   { name: "Computer Vision/Machine Vision", icon: Eye },
   { name: "Fractal Graphics", icon: Layers },
   { name: "Biomedical Imaging", icon: Brain },
+  { name: "Applied AI/ML/DL", icon: BrainCircuit },
 ]
 export const EducationPageeducationData = [
   {
@@ -1499,6 +1500,7 @@ export const books = [
     id: 1,
     title: "Intelligent Fractal Based Image Analysis: Applications in Pattern Recognition and Machine Vision",
     authors: "S.R. Nayak, J. Nayak, K. Muhammad, Y. Karaca",
+    booklink: 'https://shop.elsevier.com/books/intelligent-fractal-based-image-analysis/nayak/978-0-443-18468-0',
     publisher: "Elsevier",
     year: 2024,
     isbn: "9780443184697",
@@ -1508,6 +1510,7 @@ export const books = [
     id: 2,
     title: "Deep Learning for Sustainable Agriculture",
     authors: "R.C. Poonia, V. Singh, and S.R. Nayak",
+    booklink : 'https://www.sciencedirect.com/book/9780323852142/deep-learning-for-sustainable-agriculture',
     publisher: "Elsevier",
     year: 2022,
     isbn: "9780323852142",
@@ -1517,6 +1520,7 @@ export const books = [
     id: 3,
     title: "Smart Sensor Networks Using AI for Industry 4.0: Applications and New Opportunities",
     authors: "S.R. Nayak, B.R. Sahoo, M. Muthukumaran, J. Mishra",
+    booklink : 'https://www.taylorfrancis.com/books/edit/10.1201/9781003145028/smart-sensor-networks-using-ai-industry-4-0-soumya-ranjan-nayak-biswa-mohan-sahoo-muthukumaran-malarvel-jibitesh-mishra',
     publisher: "CRC Press (Taylor & Francis)",
     year: 2021,
     isbn: "9781003145028",
@@ -1526,6 +1530,7 @@ export const books = [
     id: 4,
     title: "Machine Vision Inspection Systems: Machine Learning-Based Approaches",
     authors: "M. Muthukumaran, S.R. Nayak, S.N. Panda, P.K. Pattnaik",
+    booklink : 'https://onlinelibrary.wiley.com/doi/book/10.1002/9781119786122',
     publisher: "Wiley-Scrivener Publishing",
     year: 2021,
     isbn: "9781119786092",
@@ -1535,6 +1540,7 @@ export const books = [
     id: 5,
     title: "Machine Vision Inspection Systems: An Image Processing Approach",
     authors: "M. Muthukumaran, S.R. Nayak, S.N. Panda, P.K. Pattnaik, N. Muangnak",
+    booklink : 'https://www.wiley.com/en-us/Machine+Vision+Inspection+Systems%2C+Volume+1%2C+Image+Processing%2C+Concepts%2C+Methodologies%2C+and+Applications-p-9781119682097',
     publisher: "Wiley-Scrivener Publishing",
     year: 2020,
     isbn: "9781119681809",
@@ -1544,6 +1550,7 @@ export const books = [
     id: 6,
     title: "Examining Fractal Image Processing and Analysis",
     authors: "S.R. Nayak, J. Mishra",
+    booklink : '',
     publisher: "IGI Global, Advances in Computational Intelligence and Robotics (ACIR)",
     year: 2019,
     isbn: "9781799800668",
@@ -1553,6 +1560,7 @@ export const books = [
     id: 7,
     title: "Pioneering Autonomous Technology: A Deep Dive Into Hyper Automation",
     authors: "S.R. Nayak, K. Swain, R.C. Poonia, P.K. Pattnaik",
+    booklink : 'https://www.igi-global.com/book/examining-fractal-image-processing-analysis/225855',
     publisher: "Elsevier",
     year: 2024,
     isbn: "Contract Signed (on-going)",
@@ -1560,9 +1568,9 @@ export const books = [
   },
   {
     id: 8,
-    title:
-      "Genome Mapping and Advancements in Deep Learning Approaches: Computation and Analysis in Medical Applications",
+    title: "Genome Mapping and Advancements in Deep Learning Approaches: Computation and Analysis in Medical Applications",
     authors: "S.R. Nayak, S.P. Singh, J. Singh, P. Singh, M. Diwakar, D. Garg",
+    booklink : 'https://shop.elsevier.com/books/pioneering-autonomous-technology-a-deep-dive-into-hyper-automation/swain/978-0-443-31710-1',
     publisher: "CRC Press (Taylor & Francis)",
     year: 2024,
     isbn: "Contract Signed (on-going)",
@@ -2055,22 +2063,34 @@ export const awardsData: AwardData[] = [
   {
     icon: Star,
     title: "MHRD Govt. of India Fellowship",
-    description: ["TEQIP-II", "2013-2017"],
+    description: [
+      { text: "TEQIP-II" },
+      { text: "2013-2017" }
+    ],
   },
   {
     icon: Award,
     title: "Best Paper Award",
-    description: ["International Conference"],
+    description: [
+      { text: "International Conference" }
+    ],
   },
   {
     icon: Globe,
     title: "World’s Top 2% Scientist",
-    description: ["Stanford University", "2024, 2025"],
+    description: [
+      { text: "Stanford University" },
+      { text: "2024, 2025" },
+      { text: "Top Scientist", link: "https://topscinet.com/scientist_profile/Nayak,%20Soumya%20Ranjan/2015/?stype=single_year" }
+    ],
   },
   {
     icon: User,
     title: "Best Teacher Award",
-    description: ["Odisha Technological Conclave", "2024"],
+      description: [
+      { text: "Odisha Technological Conclave" },
+      { text: "2024" }
+    ],
   },
 ];
 export const ProfessionalcardsData: ProfessionalCardData[] = [
@@ -2210,3 +2230,13 @@ export const ProfessionalcardsData: ProfessionalCardData[] = [
     ],
   },
 ];
+
+export  const textList = [
+    "Fractal Graphics",
+    "Biomedical Imaging",
+    "Applied AI",
+    "Deep Learning",
+    "Machine Learning",
+    "Pattern Recognition",
+    "Computer Vision",
+  ];

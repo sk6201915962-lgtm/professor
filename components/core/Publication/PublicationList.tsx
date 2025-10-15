@@ -1,5 +1,6 @@
 "use client"
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input';
 import { allPublications, categories, years } from '@/lib/constants'
@@ -68,7 +69,10 @@ const PublicationList = () => {
                 return <FileText className="h-5 w-5" />
         }
     };
-
+    const handleNavigateBookLink = (booklink: string) => {
+        if (!booklink) return;
+        window.open(booklink, '_blank');
+    }
     return (
         <>
             <section className="py-8 bg-white border-b">
@@ -190,6 +194,10 @@ const PublicationList = () => {
                                                     </p>
                                                 )}
                                             </div>
+                                            {publication.booklink && 
+                                            <Button className='mt-2 cursor-pointer' onClick={() => handleNavigateBookLink(publication?.booklink?? '')}>
+                                                View Book
+                                            </Button>}
                                         </div>
                                     </div>
                                 </CardContent>

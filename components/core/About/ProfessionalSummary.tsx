@@ -12,7 +12,7 @@ const ProfessionalSummary = () => {
           <Card className="hover-lift">
             <CardContent className="p-6 sm:p-8 lg:p-10">
               <div className="prose prose-sm sm:prose-base lg:prose-lg max-w-none text-gray-700 leading-relaxed">
-                <p className="text-base sm:text-lg mb-6">
+                <p className="text-base sm:text-lg mb-6 text-justify">
                   Dr. Soumya Ranjan Nayak now holds the position of Sr. Assistant Professor in the School of Computer
                   Engineering at Kalinga Institute of Industrial Technology (KIIT) Deemed to be University, located in
                   Odisha, India. He obtained a Doctor of Philosophy (Ph.D) and Master of Technology (M.Tech) in

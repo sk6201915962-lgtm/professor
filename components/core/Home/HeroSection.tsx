@@ -5,6 +5,7 @@ import { ExternalLink, Target } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import TypingText from './TypingText'
 
 const HeroSection = () => {
   const handleResumelink = () => {
@@ -13,6 +14,13 @@ const HeroSection = () => {
     '_blank'
   );
   }
+   const handlePhDThesislink = () => {
+    window.open(
+    'https://shodhganga.inflibnet.ac.in/handle/10603/591146',
+    '_blank'
+  );
+  }
+ 
   return (
    <section className="min-h-screen bg-[#1F1F1D] grid-bg pt-20 flex items-center">
         <div className="container mx-auto px-4 sm:px-6">
@@ -38,8 +46,9 @@ const HeroSection = () => {
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold mb-2 text-balance capitalize">
                   Dr. Soumya Ranjan Nayak
                 </h1>
-                <h2 className="text-lg sm:text-xl lg:text-2xl text-[#EBB884] mb-4 uppercase">Assistant PROFESSOR</h2>
-                <p className="text-sm sm:text-base lg:text-lg text-gray-300 leading-relaxed">
+                <h2 className="text-lg sm:text-xl lg:text-2xl text-[#EBB884] mb-2 uppercase">Assistant PROFESSOR</h2>
+                <TypingText/>
+                <p className="text-sm sm:text-base lg:text-lg mt-2 text-gray-300 leading-relaxed">
                   SCHOOL OF COMPUTER ENGINEERING
                   <br />
                   KIIT DEEMED TO BE UNIVERSITY
@@ -57,15 +66,19 @@ const HeroSection = () => {
                   MY RESUME
                 </Button>
                 <Button
-                  variant="outline"
-                  className="border-[#EBB884] text-[#EBB884] hover:bg-[#EBB884] hover:text-[#1F1F1D] px-6 sm:px-8 py-3 hover-lift bg-transparent text-sm sm:text-base"
-                  size="lg"
-                  asChild
+                  className="bg-[#EBB884] text-[#1F1F1D] hover:bg-[#E8BF96] px-6 sm:px-8 py-3 hover-lift text-sm sm:text-base cursor-pointer"
+                  size="lg" 
                 >
                   <Link href="https://cse.kiit.ac.in/profiles/soumya-ranjan-nayak/" target="_blank">
                     OFFICIAL PROFILE
-                    <ExternalLink className="ml-2 h-4 w-4" />
                   </Link>
+                </Button>
+                 <Button
+                  className="uppercase bg-[#EBB884] text-[#1F1F1D] hover:bg-[#E8BF96] px-6 sm:px-8 py-3 hover-lift text-sm sm:text-base cursor-pointer"
+                  size="lg"
+                  onClick={handlePhDThesislink}
+                >
+                  My PHD Thesis
                 </Button>
               </div>
 
