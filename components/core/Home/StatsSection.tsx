@@ -12,7 +12,7 @@ const StatsSection = () => {
                 <CardContent className="p-4 sm:p-6">
                   <stat.icon className="h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 mx-auto mb-3 sm:mb-4 text-[#EBB884]" />
                   <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#1F1F1D] mb-2">{stat.value}</div>
-                  <div className="text-xs sm:text-sm text-gray-600 font-medium">{stat.label}</div>
+                  <div className="text-xs sm:text-sm text-gray-600 font-medium capitalize">{stat.label}</div>
                 </CardContent>
               </Card>
             ))}

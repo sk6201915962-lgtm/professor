@@ -12,7 +12,7 @@ const ResearchIntrest = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
               {researchInterests.map((interest, index) => (
-                <Card key={index} className="bg-[#2A2A28] border-[#EBB884] hover-lift">
+                <Card key={index} className="bg-[#2A2A28] border-[#EBB884] hover-lift h-full min-h-52">
                   <CardContent className="p-6 text-center">
                     <interest.icon className="h-10 w-10 mx-auto mb-4 text-[#EBB884]" />
                     <h3 className="text-[#EBB884] font-bold text-lg">{interest.name}</h3>

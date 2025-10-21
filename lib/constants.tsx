@@ -2222,13 +2222,13 @@ export const ProfessionalcardsData: ProfessionalCardData[] = [
       { title: "CSTA Life Member", description: "Member No. 76152832" },
     ],
   },
-  {
-    category: "Adjunct Professor",
-    items: [
-      { title: "Chandigarh University, Punjab", description: "2020–2022" },
-      { title: "SR University, Warangal", description: "2023–2024" },
-    ],
-  },
+  // {
+  //   category: "Adjunct Professor",
+  //   items: [
+  //     { title: "Chandigarh University, Punjab", description: "2020–2022" },
+  //     { title: "SR University, Warangal", description: "2023–2024" },
+  //   ],
+  // },
 ];
 
 export  const textList = [

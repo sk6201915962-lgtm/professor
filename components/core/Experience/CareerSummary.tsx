@@ -11,31 +11,31 @@ const CareerSummary = () => {
                <Card className="bg-[#2A2A28] border-[#EBB884]">
                 <CardContent className="p-6 text-center">
                   <div className="text-2xl sm:text-3xl font-bold text-[#EBB884] mb-2">160+</div>
-                  <div className="text-sm sm:text-base text-gray-300">Scopus</div>
+                  <div className="text-sm sm:text-base text-gray-300 uppercase font-semibold">Scopus</div>
                 </CardContent>
               </Card>
                <Card className="bg-[#2A2A28] border-[#EBB884]">
                 <CardContent className="p-6 text-center">
                   <div className="text-2xl sm:text-3xl font-bold text-[#EBB884] mb-2">60+</div>
-                  <div className="text-sm sm:text-base text-gray-300">sci/scie</div>
+                  <div className="text-sm sm:text-base text-gray-300 uppercase font-semibold">sci/scie</div>
                 </CardContent>
               </Card>
               <Card className="bg-[#2A2A28] border-[#EBB884]">
                 <CardContent className="p-6 text-center">
                   <div className="text-2xl sm:text-3xl font-bold text-[#EBB884] mb-2">18+</div>
-                  <div className="text-sm sm:text-base text-gray-300">pattern file</div>
+                  <div className="text-sm sm:text-base text-gray-300 uppercase font-semibold">patient filed</div>
                 </CardContent>
               </Card>
                <Card className="bg-[#2A2A28] border-[#EBB884]">
                 <CardContent className="p-6 text-center">
                   <div className="text-2xl sm:text-3xl font-bold text-[#EBB884] mb-2">13+</div>
-                  <div className="text-sm sm:text-base text-gray-300">year</div>
+                  <div className="text-sm sm:text-base text-gray-300 uppercase font-semibold">years</div>
                 </CardContent>
               </Card>
               <Card className="bg-[#2A2A28] border-[#EBB884]">
                 <CardContent className="p-6 text-center">
                   <div className="text-2xl sm:text-3xl font-bold text-[#EBB884] mb-2">6</div>
-                  <div className="text-sm sm:text-base text-gray-300">Academic Institutions</div>
+                  <div className="text-sm sm:text-base text-gray-300 uppercase font-semibold">Academic Institutions</div>
                 </CardContent>
               </Card>
              

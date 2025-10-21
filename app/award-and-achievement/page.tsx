@@ -14,7 +14,7 @@ export default function AwardsPage() {
         title="Awards & Achievements"
         subtext="Recognition and accomplishments of Dr. Soumya Ranjan Nayak"
       />
-       <section className="mt-12 max-w-7xl mx-auto grid gap-6 sm:grid-cols-2">
+       <section className="my-12 max-w-7xl mx-auto grid md:gap-12 gap-6 sm:grid-cols-2 p-1">
         {awardsData.map((award, idx) => (
           <AwardCard
             key={idx}
